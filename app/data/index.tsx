@@ -3,11 +3,10 @@ import { Meme } from "@/types";
 export const fakeMemes: Meme[] = [
   {
     id: 1,
-    title: "Distracted Boyfriend",
-    imageUrl:
-      "https://i.ibb.co/Qjpg8HxQ/top-meme-coins-to-buy-now-here-are-3-pepe-alternatives-going-to-the-moon-in-2024.webp",
-    likes: 12,
-    link: "https://www.reddit.com/r/memes/comments/np5j42/distracted_boyfriend_updated/",
+    title: "Two Buttons",
+    imageUrl: "https://i.ibb.co/Kpw6hkyX/shocked-face-shocked-meme.gif",
+    likes: 7,
+    link: "https://www.reddit.com/r/memes/comments/aa1c3v/the_choice_is_real/",
   },
   {
     id: 2,
@@ -24,11 +23,12 @@ export const fakeMemes: Meme[] = [
     link: "https://www.reddit.com/r/memes/comments/j98l4r/drake_knows/",
   },
   {
+    title: "Distracted Boyfriend",
+    imageUrl:
+      "https://i.ibb.co/Qjpg8HxQ/top-meme-coins-to-buy-now-here-are-3-pepe-alternatives-going-to-the-moon-in-2024.webp",
+    likes: 12,
+    link: "https://www.reddit.com/r/memes/comments/np5j42/distracted_boyfriend_updated/",
     id: 4,
-    title: "Two Buttons",
-    imageUrl: "https://i.ibb.co/Kpw6hkyX/shocked-face-shocked-meme.gif",
-    likes: 7,
-    link: "https://www.reddit.com/r/memes/comments/aa1c3v/the_choice_is_real/",
   },
   {
     id: 5,

@@ -28,7 +28,12 @@ export const Navbar = () => {
   };
 
   return (
-    <HeroUINavbar maxWidth="xl" position="sticky">
+    <HeroUINavbar
+      maxWidth="xl"
+      position="sticky"
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
@@ -44,7 +49,7 @@ export const Navbar = () => {
                   linkStyles({ color: "foreground" }),
                   pathname === item.href
                     ? "text-primary font-medium"
-                    : "text-default",
+                    : "text-default"
                 )}
                 href={item.href}
               >
@@ -56,7 +61,7 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
+        className="hidden lg:flex basis-1/5 lg:basis-full"
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
@@ -67,18 +72,18 @@ export const Navbar = () => {
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+      <NavbarContent className="lg:hidden basis-1 pl-4" justify="end">
         <Link isExternal aria-label="Github" href={siteConfig.links.github}>
           <GithubIcon className="text-default-500" />
         </Link>
         <ThemeSwitch />
-        <NavbarMenuToggle onClick={() => setIsMenuOpen(!isMenuOpen)} />
+        <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarMenu onToggle={() => setIsMenuOpen(!isMenuOpen)}>
+      <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
+            <NavbarMenuItem key={`${item.href}-${index}`}>
               <Link
                 color={pathname === item.href ? "danger" : "foreground"}
                 href={item.href}
