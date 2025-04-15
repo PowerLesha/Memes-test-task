@@ -5,7 +5,7 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 export type Meme = {
-  id: number;
+  id: number | undefined;
   title: string;
   imageUrl: string;
   likes: number;

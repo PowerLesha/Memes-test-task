@@ -18,7 +18,7 @@ const MemeList = React.memo(() => {
         memes.map((meme) => (
           <MemeCard
             key={meme.id}
-            id={meme.id}
+            id={meme.id ?? 0}
             title={meme.title}
             imageUrl={meme.imageUrl}
             likes={meme.likes}

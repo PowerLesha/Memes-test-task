@@ -7,8 +7,6 @@ import {
   TableRow,
   TableCell,
   Button,
-  Modal,
-  Input,
 } from "@heroui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +16,7 @@ import {
   selectMeme,
   updateMeme,
 } from "../store/slices/memeSlice";
+import EditMemeModal from "@/components/EditMemeModal";
 
 const MemeTable = () => {
   const dispatch = useDispatch();
@@ -29,7 +28,27 @@ const MemeTable = () => {
 
   const handleSave = () => {
     if (!selectedMeme) return;
-    dispatch(updateMeme(selectedMeme));
+
+    const { title, imageUrl, likes } = selectedMeme;
+
+    const isValidUrl = /^(http|https):\/\/.*\.(jpg|jpeg)$/.test(imageUrl);
+    const isValidTitle = title && title.length >= 3;
+
+    const isValidLikes = typeof likes === "number" && likes >= 0 && likes <= 99;
+
+    if (!isValidTitle || !isValidUrl || !isValidLikes) {
+      return;
+    }
+
+    const updatedMeme = {
+      id: selectedMeme.id ?? -1,
+      title,
+      imageUrl,
+      likes,
+      link: selectedMeme.link,
+    };
+
+    dispatch(updateMeme(updatedMeme));
     setOpenModal(false);
     dispatch(clearSelectedMeme());
   };
@@ -39,6 +58,17 @@ const MemeTable = () => {
     setOpenModal(true);
   };
 
+  const handleInputChange = (field: string, value: any) => {
+    if (selectedMeme) {
+      dispatch(
+        selectMeme({
+          ...selectedMeme,
+          [field]: value,
+        })
+      );
+    }
+  };
+
   return (
     <div className="p-4 w-full">
       <Table aria-label="Meme Table" className="w-full">
@@ -46,11 +76,7 @@ const MemeTable = () => {
           <TableColumn>ID</TableColumn>
           <TableColumn>Title</TableColumn>
           <TableColumn>Likes</TableColumn>
-          <TableColumn className="text-center">
-            {" "}
-            {/* Center the "Actions" header */}
-            Actions
-          </TableColumn>
+          <TableColumn className="text-center">Actions</TableColumn>
         </TableHeader>
         <TableBody>
           {memes.map((meme) => (
@@ -59,8 +85,6 @@ const MemeTable = () => {
               <TableCell>{meme.title}</TableCell>
               <TableCell>{meme.likes}</TableCell>
               <TableCell className="text-center">
-                {" "}
-                {/* Centering the actions */}
                 <Button onPress={() => handleEditClick(meme)}>Edit</Button>
               </TableCell>
             </TableRow>
@@ -68,49 +92,16 @@ const MemeTable = () => {
         </TableBody>
       </Table>
 
-      {selectedMeme && (
-        <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
-          <div className="p-4 space-y-4 w-full max-w-lg mx-auto">
-            <h2 className="text-lg font-bold">Edit Meme</h2>
-
-            <Input
-              label="Title"
-              value={selectedMeme.title}
-              onChange={(e) =>
-                dispatch(selectMeme({ ...selectedMeme, title: e.target.value }))
-              }
-            />
-
-            <Input
-              label="Image URL"
-              value={selectedMeme.imageUrl}
-              onChange={(e) =>
-                dispatch(
-                  selectMeme({ ...selectedMeme, imageUrl: e.target.value })
-                )
-              }
-            />
-
-            <Input
-              label="Likes"
-              type="number"
-              value={String(selectedMeme.likes)}
-              onChange={(e) =>
-                dispatch(
-                  selectMeme({ ...selectedMeme, likes: +e.target.value })
-                )
-              }
-            />
-
-            <div className="flex justify-end space-x-2">
-              <Button variant="light" onPress={() => setOpenModal(false)}>
-                Cancel
-              </Button>
-              <Button onPress={handleSave}>Save</Button>
-            </div>
-          </div>
-        </Modal>
-      )}
+      <EditMemeModal
+        isOpen={openModal}
+        selectedMeme={selectedMeme}
+        onClose={() => {
+          setOpenModal(false);
+          dispatch(clearSelectedMeme());
+        }}
+        onSave={handleSave}
+        onChange={handleInputChange}
+      />
     </div>
   );
 };
