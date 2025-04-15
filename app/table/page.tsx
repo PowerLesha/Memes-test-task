@@ -27,10 +27,9 @@ const MemeTable = () => {
     (state: RootState) => state.memes.selectedMeme
   );
   const [openModal, setOpenModal] = useState(false);
-  const [validLength, setValidLength] = useState(true);
 
   const handleSave = () => {
-    // if (!selectedMeme) return;
+    if (!selectedMeme) return;
 
     const { title, imageUrl, likes } = selectedMeme;
 

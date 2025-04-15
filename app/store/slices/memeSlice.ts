@@ -1,3 +1,5 @@
+"use client";
+
 import { Meme } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
