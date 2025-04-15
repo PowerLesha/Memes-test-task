@@ -22,20 +22,24 @@ const MemeCard = ({
   onOpenMemeLink,
 }: MemeCardProps) => {
   return (
-    <Card key={id} className="w-full">
-      <CardHeader>
+    <Card key={id} className="w-full h-full flex flex-col ">
+      <CardHeader className="flex justify-center items-center">
         <Image
           src={imageUrl}
           alt={title}
-          className="h-48 w-full object-cover"
+          className="w-full h-1/2 object-cover"
+          height={100}
         />
       </CardHeader>
-      <CardBody>
-        <p className="font-semibold text-xl">{title}</p>
-        <p className="text-gray-500">{likes} Likes</p>
-        <Button onPress={() => onOpenMemeLink(link)} className="mt-2">
-          Open Meme
-        </Button>
+
+      <CardBody className="flex flex-col gap-8 justify-between p-4 h-1/2">
+        <div>
+          <p className="font-semibold text-xl">{title}</p>
+          <p className="text-gray-500">{likes} Likes</p>
+        </div>
+        <div className="mt-auto">
+          <Button onPress={() => onOpenMemeLink(link)}>Open Meme</Button>
+        </div>
       </CardBody>
     </Card>
   );
