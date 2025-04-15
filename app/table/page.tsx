@@ -34,8 +34,7 @@ const MemeTable = () => {
     const { title, imageUrl, likes } = selectedMeme;
 
     const isValidUrl = /^(http|https):\/\/.*\.(jpg|jpeg)$/.test(imageUrl);
-    const isValidTitle =
-      (title && title.length >= 3) || (title && title.length <= 100);
+    const isValidTitle = title && title.length >= 3;
 
     const isValidLikes = typeof likes === "number" && likes >= 0 && likes <= 99;
 
