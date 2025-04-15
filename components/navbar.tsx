@@ -1,3 +1,7 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
@@ -16,6 +20,13 @@ import { ThemeSwitch } from "@/components/theme-switch";
 import { GithubIcon, Logo } from "@/components/icons";
 
 export const Navbar = () => {
+  const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMenuItemClick = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <HeroUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -31,9 +42,10 @@ export const Navbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium"
+                  pathname === item.href
+                    ? "text-primary font-medium"
+                    : "text-default"
                 )}
-                color="foreground"
                 href={item.href}
               >
                 {item.label}
@@ -60,23 +72,18 @@ export const Navbar = () => {
           <GithubIcon className="text-default-500" />
         </Link>
         <ThemeSwitch />
-        <NavbarMenuToggle />
+        <NavbarMenuToggle onClick={() => setIsMenuOpen(!isMenuOpen)} />
       </NavbarContent>
 
-      <NavbarMenu>
+      <NavbarMenu onToggle={() => setIsMenuOpen(!isMenuOpen)}>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
-                }
+                color={pathname === item.href ? "danger" : "foreground"}
                 href={item.href}
                 size="lg"
+                onClick={handleMenuItemClick}
               >
                 {item.label}
               </Link>
