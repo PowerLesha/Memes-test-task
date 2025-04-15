@@ -78,26 +78,28 @@ const MemeTable = () => {
 
   return (
     <div className="p-4 w-full">
-      <Table aria-label="Meme Table" className="w-full">
-        <TableHeader>
-          <TableColumn>ID</TableColumn>
-          <TableColumn>Title</TableColumn>
-          <TableColumn>Likes</TableColumn>
-          <TableColumn className="text-center">Actions</TableColumn>
-        </TableHeader>
-        <TableBody>
-          {memes.map((meme) => (
-            <TableRow key={meme.id}>
-              <TableCell>{meme.id}</TableCell>
-              <TableCell>{meme.title}</TableCell>
-              <TableCell>{meme.likes}</TableCell>
-              <TableCell className="text-center">
-                <Button onPress={() => handleEditClick(meme)}>Edit</Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <div className="overflow-x-auto">
+        <Table aria-label="Meme Table" className="w-full min-w-full">
+          <TableHeader>
+            <TableColumn>ID</TableColumn>
+            <TableColumn>Title</TableColumn>
+            <TableColumn>Likes</TableColumn>
+            <TableColumn className="text-center">Actions</TableColumn>
+          </TableHeader>
+          <TableBody>
+            {memes.map((meme) => (
+              <TableRow key={meme.id}>
+                <TableCell>{meme.id}</TableCell>
+                <TableCell>{meme.title}</TableCell>
+                <TableCell>{meme.likes}</TableCell>
+                <TableCell className="text-center">
+                  <Button onPress={() => handleEditClick(meme)}>Edit</Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
 
       <EditMemeModal
         isOpen={openModal}
