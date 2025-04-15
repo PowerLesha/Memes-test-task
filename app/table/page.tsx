@@ -51,6 +51,7 @@ const MemeTable = () => {
     };
 
     dispatch(updateMeme(updatedMeme));
+    console.log("updated");
     setOpenModal(false);
     dispatch(clearSelectedMeme());
   };

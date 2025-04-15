@@ -19,24 +19,20 @@ const memeSlice = createSlice({
   reducers: {
     setMemes: (state, action: PayloadAction<Meme[]>) => {
       state.memes = action.payload;
-      if (typeof window !== "undefined") {
-        localStorage.setItem("memes", JSON.stringify(action.payload));
-      }
+
+      localStorage.setItem("memes", JSON.stringify(action.payload));
     },
     addMeme: (state, action: PayloadAction<Meme>) => {
       state.memes.push(action.payload);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("memes", JSON.stringify(state.memes));
-      }
+
+      localStorage.setItem("memes", JSON.stringify(state.memes));
     },
     updateMeme: (state, action: PayloadAction<Meme>) => {
       state.memes = state.memes.map((meme) =>
         meme.id === action.payload.id ? action.payload : meme
       );
 
-      if (typeof window !== "undefined") {
-        localStorage.setItem("memes", JSON.stringify(state.memes));
-      }
+      localStorage.setItem("memes", JSON.stringify(state.memes));
     },
 
     selectMeme: (state, action: PayloadAction<Meme>) => {
