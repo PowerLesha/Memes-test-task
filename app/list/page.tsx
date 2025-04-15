@@ -31,4 +31,6 @@ const MemeList = React.memo(() => {
   );
 });
 
+MemeList.displayName = "MemeList";
+
 export default MemeList;
