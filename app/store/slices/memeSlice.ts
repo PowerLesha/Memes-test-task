@@ -28,16 +28,15 @@ const memeSlice = createSlice({
       }
     },
     updateMeme: (state, action: PayloadAction<Meme>) => {
-      const index = state.memes.findIndex(
-        (meme) => meme.id === action.payload.id,
+      state.memes = state.memes.map((meme) =>
+        meme.id === action.payload.id ? action.payload : meme
       );
-      if (index !== -1) {
-        state.memes[index] = action.payload;
-        if (typeof window !== "undefined") {
-          localStorage.setItem("memes", JSON.stringify(state.memes));
-        }
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem("memes", JSON.stringify(state.memes));
       }
     },
+
     selectMeme: (state, action: PayloadAction<Meme>) => {
       state.selectedMeme = action.payload;
     },

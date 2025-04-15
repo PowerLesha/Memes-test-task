@@ -7,8 +7,6 @@ import {
   TableRow,
   TableCell,
   Button,
-  Modal,
-  Input,
 } from "@heroui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +16,7 @@ import {
   selectMeme,
   updateMeme,
 } from "../store/slices/memeSlice";
+import EditMemeModal from "@/components/EditMemeModal";
 
 const MemeTable = () => {
   const dispatch = useDispatch();
@@ -94,70 +93,16 @@ const MemeTable = () => {
         </TableBody>
       </Table>
 
-      <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
-        <div
-          className="p-4 space-y-4 w-full max-w-lg mx-auto bg-white rounded-lg shadow-lg"
-          style={{
-            position: "fixed",
-            top: "55%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            zIndex: 9999,
-            backgroundColor: "rgba(0, 0, 0, 0.9)",
-          }}
-        >
-          <h2 className="text-lg font-bold">Edit Meme</h2>
-
-          <Input
-            label="ID (Read Only)"
-            value={String(selectedMeme?.id ?? -1)}
-            readOnly
-          />
-
-          <Input
-            label="Title"
-            value={selectedMeme?.title || ""}
-            onChange={(e) => handleInputChange("title", e.target.value)}
-            required
-            minLength={3}
-            maxLength={100}
-          />
-          {!validLength && (
-            <p className="text-red-500 text-sm mt-1">
-              Title must be between 3 and 100 characters.
-            </p>
-          )}
-          <Input
-            label="Image URL (JPG)"
-            value={selectedMeme?.imageUrl || ""}
-            onChange={(e) => handleInputChange("imageUrl", e.target.value)}
-            required
-            pattern="^(http|https):\/\/.*\.(jpg|jpeg)$"
-          />
-
-          <Input
-            label="Likes"
-            type="number"
-            value={String(selectedMeme?.likes || 0)}
-            onChange={(e) =>
-              handleInputChange(
-                "likes",
-                Math.max(0, Math.min(99, +e.target.value))
-              )
-            }
-            min={0}
-            max={99}
-            required
-          />
-
-          <div className="flex justify-end space-x-2">
-            <Button variant="light" onPress={() => setOpenModal(false)}>
-              Cancel
-            </Button>
-            <Button onPress={handleSave}>Save</Button>
-          </div>
-        </div>
-      </Modal>
+      <EditMemeModal
+        isOpen={openModal}
+        selectedMeme={selectedMeme}
+        onClose={() => {
+          setOpenModal(false);
+          dispatch(clearSelectedMeme());
+        }}
+        onSave={handleSave}
+        onChange={handleInputChange}
+      />
     </div>
   );
 };
