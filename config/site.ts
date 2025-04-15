@@ -9,22 +9,22 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Meme List",
-      href: "/list",
-    },
-    {
       label: "Meme Table",
       href: "/table",
+    },
+    {
+      label: "Meme List",
+      href: "/list",
     },
   ],
   navMenuItems: [
     {
-      label: "Meme List",
-      href: "/list",
-    },
-    {
       label: "Meme Table",
       href: "/table",
+    },
+    {
+      label: "Meme List",
+      href: "/list",
     },
   ],
   links: {

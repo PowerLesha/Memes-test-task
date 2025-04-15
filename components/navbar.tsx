@@ -46,10 +46,9 @@ export const Navbar = () => {
             <NavbarItem key={item.href}>
               <NextLink
                 className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  pathname === item.href
-                    ? "text-primary font-medium"
-                    : "text-default"
+                  linkStyles({
+                    color: pathname === item.href ? "danger" : "foreground",
+                  })
                 )}
                 href={item.href}
               >
@@ -85,7 +84,11 @@ export const Navbar = () => {
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item.href}-${index}`}>
               <Link
-                color={pathname === item.href ? "danger" : "foreground"}
+                className={clsx(
+                  linkStyles({
+                    color: pathname === item.href ? "danger" : "foreground",
+                  })
+                )}
                 href={item.href}
                 size="lg"
                 onClick={handleMenuItemClick}

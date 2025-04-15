@@ -27,7 +27,7 @@ const MemeCard = ({
         <Image
           src={imageUrl}
           alt={title}
-          className="w-full h-1/2 object-cover"
+          className="max-w-full max-h-60 object-contain"
           height={100}
         />
       </CardHeader>

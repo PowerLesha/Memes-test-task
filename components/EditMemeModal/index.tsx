@@ -35,10 +35,10 @@ const EditMemeModal = ({
         className="p-4 space-y-4 w-full max-w-lg mx-auto bg-white rounded-lg shadow-lg"
         style={{
           position: "fixed",
-          top: "50%",
+          top: "40%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          zIndex: 9999,
+          zIndex: 2,
           backgroundColor: "rgba(0, 0, 0, 0.9)",
           maxHeight: "90vh",
           overflowY: "auto",

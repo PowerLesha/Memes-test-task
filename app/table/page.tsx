@@ -77,8 +77,8 @@ const MemeTable = () => {
   };
 
   return (
-    <div className="p-4 w-full">
-      <div className="overflow-x-auto">
+    <div className=" w-full">
+      <div className="overflow-x-auto px-0 sm:px-6 w-full">
         <Table aria-label="Meme Table" className="w-full min-w-full">
           <TableHeader>
             <TableColumn>ID</TableColumn>
