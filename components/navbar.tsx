@@ -44,7 +44,7 @@ export const Navbar = () => {
                   linkStyles({ color: "foreground" }),
                   pathname === item.href
                     ? "text-primary font-medium"
-                    : "text-default"
+                    : "text-default",
                 )}
                 href={item.href}
               >

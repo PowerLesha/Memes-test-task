@@ -22,7 +22,7 @@ const EditMemeModal = ({
   useEffect(() => {
     if (selectedMeme?.title) {
       setValidLength(
-        selectedMeme.title.length >= 3 && selectedMeme.title.length <= 100
+        selectedMeme.title.length >= 3 && selectedMeme.title.length <= 100,
       );
     }
   }, [selectedMeme?.title]);

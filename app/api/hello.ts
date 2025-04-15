@@ -4,7 +4,7 @@ import { fakeMemes } from "../data";
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Meme[]>
+  res: NextApiResponse<Meme[]>,
 ) {
   res.status(200).json(fakeMemes);
 }

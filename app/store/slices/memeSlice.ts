@@ -29,7 +29,7 @@ const memeSlice = createSlice({
     },
     updateMeme: (state, action: PayloadAction<Meme>) => {
       const index = state.memes.findIndex(
-        (meme) => meme.id === action.payload.id
+        (meme) => meme.id === action.payload.id,
       );
       if (index !== -1) {
         state.memes[index] = action.payload;

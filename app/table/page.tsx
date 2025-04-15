@@ -22,7 +22,7 @@ const MemeTable = () => {
   const dispatch = useDispatch();
   const memes = useSelector((state: RootState) => state.memes.memes);
   const selectedMeme = useSelector(
-    (state: RootState) => state.memes.selectedMeme
+    (state: RootState) => state.memes.selectedMeme,
   );
   const [openModal, setOpenModal] = useState(false);
 
@@ -64,7 +64,7 @@ const MemeTable = () => {
         selectMeme({
           ...selectedMeme,
           [field]: value,
-        })
+        }),
       );
     }
   };
