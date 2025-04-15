@@ -12,7 +12,7 @@ import {
 } from "@heroui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { AppDispatch, RootState } from "../store/store";
 import {
   clearSelectedMeme,
   selectMeme,
@@ -21,7 +21,7 @@ import {
 import EditMemeModal from "@/components/EditMemeModal";
 
 const MemeTable = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const memes = useSelector((state: RootState) => state.memes.memes);
   const selectedMeme = useSelector(
     (state: RootState) => state.memes.selectedMeme
