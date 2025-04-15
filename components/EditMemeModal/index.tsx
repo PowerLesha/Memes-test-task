@@ -1,4 +1,6 @@
 "use client";
+
+export const dynamic = "force-dynamic";
 import { Input, Button, Modal } from "@heroui/react";
 import { useEffect, useState } from "react";
 
@@ -22,7 +24,7 @@ const EditMemeModal = ({
   useEffect(() => {
     if (selectedMeme?.title) {
       setValidLength(
-        selectedMeme.title.length >= 3 && selectedMeme.title.length <= 100,
+        selectedMeme.title.length >= 3 && selectedMeme.title.length <= 100
       );
     }
   }, [selectedMeme?.title]);
